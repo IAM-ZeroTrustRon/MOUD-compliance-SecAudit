@@ -1,0 +1,23 @@
+graph TD
+    A["<b>MOUD Audit Methodology</b><br/>Static Security Code Review"] --> B["<b>Phase 1: Scoping</b><br/>Attack surface inventory<br/>Routes • Middleware • Identity layers<br/>File upload paths • Audit subsystem<br/>Database schema • Dependencies<br/>Repository history"]
+
+    B --> C["<b>Phase 2: Claim-to-Code Tracing</b><br/>Verify every documented security property<br/>Locate implementation in source<br/>Confirm correctness, not just presence<br/><i>A control that exists is not a control that works</i>"]
+
+    C --> D["<b>Phase 3: Control-by-Control Review</b><br/>File-by-file manual reading<br/>Authentication • Authorization tiers<br/>Tenant isolation • PHI handling<br/>Input validation • Audit coverage"]
+
+    D --> E["<b>Phase 4: Supply Chain & Hygiene</b><br/>Dependency vulnerability review<br/>Unused dependency detection<br/>Git history inspection for secrets<br/>Repository integrity"]
+
+    E --> F["<b>Phase 5: Re-Verification</b><br/>Findings re-confirmed against live source<br/>Later dates, not assumed still valid<br/>Catches false alarms<br/>Proves findings are current"]
+
+    F --> G["<b>Severity Assignment</b><br/>Impact on PHI confidentiality,<br/>integrity, auditability<br/><b>NOT</b> difficulty to fix<br/><br/>Mapped to HIPAA Security Rule &<br/>42 CFR Part 2 provisions"]
+
+    G --> H["<b>Output</b><br/>18 Findings Identified<br/>━━━━━━━━━━━━━━━━━━<br/>Critical: 2 closed ✓<br/>High: 3 closed ✓<br/>Medium: 1 closed, 5 open<br/>Low: 1 closed, 6 open<br/><br/>35 Regression Tests<br/>Each proven to FAIL<br/>against original code"]
+
+    style A fill:#1a1a19,stroke:#0ca30c,stroke-width:2px,color:#fff
+    style B fill:#0d0d0d,stroke:#fab219,stroke-width:2px,color:#fff
+    style C fill:#0d0d0d,stroke:#fab219,stroke-width:2px,color:#fff
+    style D fill:#0d0d0d,stroke:#fab219,stroke-width:2px,color:#fff
+    style E fill:#0d0d0d,stroke:#fab219,stroke-width:2px,color:#fff
+    style F fill:#0d0d0d,stroke:#fab219,stroke-width:2px,color:#fff
+    style G fill:#0d0d0d,stroke:#ec835a,stroke-width:2px,color:#fff
+    style H fill:#0d0d0d,stroke:#0ca30c,stroke-width:3px,color:#fff

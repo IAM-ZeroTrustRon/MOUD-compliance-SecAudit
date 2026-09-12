@@ -1,0 +1,233 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MOUD Audit — Findings Matrix</title>
+<style>
+  :root {
+    --surface:      #1a1a19;
+    --plane:        #0d0d0d;
+    --ink:          #ffffff;
+    --ink-2:        #c3c2b7;
+    --muted:        #898781;
+    --rule:         #2c2c2a;
+    --critical:     #d03b3b;
+    --serious:      #ec835a;
+    --warning:      #fab219;
+    --good:         #0ca30c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    background: var(--surface);
+    font-family: Carlito, "DejaVu Sans", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 48px 32px;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .header {
+    margin-bottom: 36px;
+  }
+
+  .title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    color: var(--ink-2);
+  }
+
+  .matrix {
+    background: var(--plane);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 32px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 16px;
+    text-align: center;
+    border: 1px solid var(--rule);
+  }
+
+  th {
+    background: var(--plane);
+    color: var(--ink-2);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .severity-label {
+    background: var(--plane);
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 14px;
+    text-align: left;
+  }
+
+  .cell {
+    font-size: 20px;
+    font-weight: 700;
+    border-radius: 4px;
+    position: relative;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .cell.all-closed {
+    background: var(--good);
+    color: #000;
+  }
+
+  .cell.all-open {
+    background: var(--critical);
+  }
+
+  .cell.mixed-critical {
+    background: linear-gradient(135deg, var(--critical) 0%, var(--critical) 30%, rgba(208, 59, 59, 0.4) 70%, var(--plane) 100%);
+  }
+
+  .cell.mixed-serious {
+    background: linear-gradient(135deg, var(--serious) 0%, var(--serious) 40%, rgba(236, 131, 90, 0.4) 70%, var(--plane) 100%);
+  }
+
+  .cell.mixed-warning {
+    background: linear-gradient(135deg, var(--warning) 0%, var(--warning) 50%, rgba(250, 178, 25, 0.3) 70%, var(--plane) 100%);
+  }
+
+  .cell-label {
+    display: block;
+    font-size: 24px;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .cell-sublabel {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .cell.all-closed .cell-sublabel {
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  .legend {
+    display: flex;
+    gap: 24px;
+    font-size: 14px;
+    color: var(--ink-2);
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .legend-swatch {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+  }
+
+  .summary {
+    background: var(--plane);
+    border-left: 4px solid var(--good);
+    padding: 16px;
+    border-radius: 4px;
+    color: var(--ink-2);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .summary strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="title">Security Audit — Findings Matrix</div>
+      <div class="subtitle">MAT/MOUD Clinical Compliance Suite</div>
+    </div>
+
+    <div class="matrix">
+      <table>
+        <thead>
+          <tr>
+            <th style="text-align: left;">Severity</th>
+            <th>Closed</th>
+            <th>Open</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="severity-label">Critical</td>
+            <td><div class="cell all-closed"><span class="cell-label">2</span><span class="cell-sublabel">of 2</span></div></td>
+            <td><div class="cell all-closed"><span class="cell-label">0</span></div></td>
+          </tr>
+          <tr>
+            <td class="severity-label">High</td>
+            <td><div class="cell all-closed"><span class="cell-label">3</span><span class="cell-sublabel">of 3</span></div></td>
+            <td><div class="cell all-closed"><span class="cell-label">0</span></div></td>
+          </tr>
+          <tr>
+            <td class="severity-label">Medium</td>
+            <td><div class="cell mixed-warning"><span class="cell-label">1</span><span class="cell-sublabel">of 6</span></div></td>
+            <td><div class="cell all-open"><span class="cell-label">5</span></div></td>
+          </tr>
+          <tr>
+            <td class="severity-label">Low</td>
+            <td><div class="cell mixed-warning"><span class="cell-label">1</span><span class="cell-sublabel">of 7</span></div></td>
+            <td><div class="cell all-open"><span class="cell-label">6</span></div></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-swatch" style="background: var(--good);"></div>
+          <span>All closed</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch" style="background: var(--critical);"></div>
+          <span>All open</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch" style="background: linear-gradient(135deg, var(--warning), rgba(250, 178, 25, 0.3));"></div>
+          <span>Partially closed</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary">
+      <strong>18 findings identified.</strong> Every critical and high-severity finding is closed and regression-tested. Eleven findings remain open on a live system, documented and severity-ranked.
+    </div>
+  </div>
+</body>
+</html>
