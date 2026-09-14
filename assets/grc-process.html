@@ -1,0 +1,243 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GRC Audit Process</title>
+<style>
+  :root {
+    --surface:      #1a1a19;
+    --plane:        #0d0d0d;
+    --ink:          #ffffff;
+    --ink-2:        #c3c2b7;
+    --muted:        #898781;
+    --rule:         #2c2c2a;
+    --critical:     #d03b3b;
+    --serious:      #ec835a;
+    --warning:      #fab219;
+    --good:         #0ca30c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    background: var(--surface);
+    font-family: Carlito, "DejaVu Sans", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 48px 24px;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  .phases {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+
+  .phase {
+    background: var(--plane);
+    border-radius: 8px;
+    padding: 28px 24px;
+    border-top: 4px solid var(--rule);
+    position: relative;
+  }
+
+  .phase:nth-child(1) { border-top-color: var(--warning); }
+  .phase:nth-child(2) { border-top-color: var(--serious); }
+  .phase:nth-child(3) { border-top-color: var(--ink-2); }
+  .phase:nth-child(4) { border-top-color: var(--good); }
+
+  .phase-number {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 12px;
+    opacity: 0.3;
+  }
+
+  .phase-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+
+  .phase-items {
+    font-size: 13px;
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+
+  .phase-items li {
+    margin-bottom: 6px;
+    margin-left: 16px;
+  }
+
+  .lessons {
+    background: linear-gradient(135deg, rgba(12, 163, 12, 0.1) 0%, rgba(12, 163, 12, 0.05) 100%);
+    border: 2px solid var(--good);
+    border-radius: 8px;
+    padding: 32px;
+    margin-bottom: 32px;
+  }
+
+  .lessons-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--good);
+    margin-bottom: 20px;
+  }
+
+  .lesson {
+    margin-bottom: 16px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+
+  .lesson strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .lesson::before {
+    content: "→ ";
+    color: var(--good);
+    font-weight: 700;
+    margin-right: 6px;
+  }
+
+  .summary {
+    background: var(--plane);
+    border-left: 4px solid var(--ink-2);
+    padding: 20px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+
+  .summary strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  @media (max-width: 768px) {
+    .phases {
+      grid-template-columns: 1fr;
+    }
+
+    .title {
+      font-size: 24px;
+    }
+
+    .lessons {
+      padding: 20px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="subtitle">Professional GRC Methodology</div>
+      <div class="title">Security Audit & Risk Assessment</div>
+    </div>
+
+    <div class="phases">
+      <div class="phase">
+        <div class="phase-number">1</div>
+        <div class="phase-title">Risk Assessment</div>
+        <ul class="phase-items">
+          <li>Inventory attack surface</li>
+          <li>Identify 18 findings</li>
+          <li>Classify by severity</li>
+          <li>Map to HIPAA / 42 CFR</li>
+        </ul>
+      </div>
+
+      <div class="phase">
+        <div class="phase-number">2</div>
+        <div class="phase-title">Remediation Planning</div>
+        <ul class="phase-items">
+          <li>Sequence by impact</li>
+          <li>Defense in depth</li>
+          <li>Fail-closed defaults</li>
+          <li>Document exclusions</li>
+        </ul>
+      </div>
+
+      <div class="phase">
+        <div class="phase-number">3</div>
+        <div class="phase-title">Testing & Verification</div>
+        <ul class="phase-items">
+          <li>Write regression tests</li>
+          <li>Prove tests fail first</li>
+          <li>Verify fixes pass</li>
+          <li>Measure coverage</li>
+        </ul>
+      </div>
+
+      <div class="phase">
+        <div class="phase-number">4</div>
+        <div class="phase-title">Control Validation</div>
+        <ul class="phase-items">
+          <li>Re-verify findings</li>
+          <li>Document live state</li>
+          <li>Track open items</li>
+          <li>Establish baseline</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lessons">
+      <div class="lessons-title">Key Lessons</div>
+
+      <div class="lesson">
+        <strong>A control can be structurally correct and semantically wrong.</strong> Reviewing the shape of a check is not reviewing the check. Claim-to-code tracing catches what code review misses.
+      </div>
+
+      <div class="lesson">
+        <strong>Documentation is intent, not evidence.</strong> Comments, error messages, and architecture diagrams increase confidence in broken controls. Test against behavior, not design.
+      </div>
+
+      <div class="lesson">
+        <strong>Tests are a security control.</strong> This defect was invisible to scanning and code review, visible immediately to one test. Proof requires showing the test fails against the defective code first.
+      </div>
+
+      <div class="lesson">
+        <strong>Severity is impact, not effort.</strong> Assign severity by what breaks in production, not what's easy to fix. Sequence work by risk, not convenience.
+      </div>
+    </div>
+
+    <div class="summary">
+      <strong>18 findings identified, assessed, and remediated.</strong> Every critical and high-severity finding closed with regression tests. Open findings documented and tracked.
+    </div>
+  </div>
+</body>
+</html>
