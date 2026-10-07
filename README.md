@@ -1,6 +1,8 @@
 # MOUD Compliance Suite — GRC & IAM Security Assessment
 
-A self-conducted static security code review of a HIPAA and 42 CFR Part 2 healthcare application I designed and built.
+I built the MAT/MOUD web-based SaaS application with assistance from agentic AI development tools, then conducted a security self-assessment of my own software. The mobile version is in development. This is an owner-conducted review, not an independent third-party audit.
+
+The assessment considers controls relevant to HIPAA and, where applicable, 42 CFR Part 2. AI assistance is part of the development context; the evidence does not establish who or what introduced a particular defect.
 
 **Historical assessment: 18 findings; 7 reported closed and 11 reported open. Current operational effectiveness has not been revalidated in this documentation review.**
 
@@ -128,7 +130,7 @@ Findings were sequenced by severity and by whether they gate a pilot handling re
 
 **Prefer no dependency to a small one.** Validating that an uploaded file is genuinely the type it claims to be could have been a third-party package. For three permitted formats it is fifteen lines of explicit, auditable byte comparison instead. Every dependency added to a system holding patient data is surface someone else controls — and this codebase already carried a finding for an unused dependency.
 
-**Prove the test catches the bug.** The prior assessment reports thirty-five automated tests guarding the corrected controls. Dated output and an assessed commit are needed before using this count as current closure evidence. Before accepting each suite, I restored the original defective code and confirmed the tests failed, then restored the fixes and confirmed they passed:
+**Prove the test catches the bug.** The prior assessment reports thirty-five automated tests guarding the corrected controls. Dated output and an assessed commit are needed before using this count as current closure evidence. The prior assessment reports that before accepting each suite, I restored the original defective code and confirmed the tests failed, then restored the fixes and confirmed they passed:
 
 | Suite | Reverted to | Result |
 |---|---|---|
@@ -177,6 +179,8 @@ Threat-informed manual code review · authentication and authorization analysis 
 ---
 
 ## Related work
+
+- **[Clinical-Policy-Review-Suite](https://github.com/IAM-ZeroTrustRon/Clinical-Policy-Review-Suite)** — separate fictional policy reviews for nontechnical leadership; these recommendations do not close application findings.
 
 - **[Botium-Compliance-Audit](https://github.com/IAM-ZeroTrustRon/Botium-Compliance-Audit)** — NIST CSF audit with PCI DSS, GDPR, and SOC mapping, and a likelihood × impact risk heat map.
 - **[MedNet-Sentinel-Splunk](https://github.com/IAM-ZeroTrustRon/MedNet-Sentinel-Splunk)** — Splunk detection engineering lab: synthetic hospital log generation and SPL detection content for a three-stage attack chain.
