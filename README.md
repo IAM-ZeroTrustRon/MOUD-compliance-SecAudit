@@ -1,10 +1,10 @@
-# MOUD Compliance Suite — Security Audit
+# MOUD Compliance Suite — GRC & IAM Security Assessment
 
 A self-conducted static security code review of a HIPAA and 42 CFR Part 2 healthcare application I designed and built.
 
-**18 findings identified. Every critical and high-severity finding closed and regression-tested.**
+**Historical assessment: 18 findings; 7 reported closed and 11 reported open. Current operational effectiveness has not been revalidated in this documentation review.**
 
-![Audit summary](assets/audit-summary.jpg)
+The original audit graphic and PDF are retained as historical artifacts. Their closure and test statements describe the prior assessment, not a current production assurance decision.
 
 ---
 
@@ -12,14 +12,16 @@ A self-conducted static security code review of a HIPAA and 42 CFR Part 2 health
 
 This is the **public methodology and outcomes** record of a security assessment. The system under review is the MAT/MOUD Clinical Compliance Suite, a multi-tenant SaaS application that tracks clinician credentials for clinics treating opioid use disorder. It stores protected health information and is governed by both the HIPAA Security Rule and 42 CFR Part 2 — the stricter federal rule under which the mere association of a person with an addiction treatment program is itself protected information.
 
-The application source is private. **The full assessment report is not published here**, because eleven findings remain open on a live system; publishing their file locations would be a roadmap for attacking it. What is published is the methodology, the severity distribution, the remediation approach, and detailed write-ups of defects that are now fixed.
+This repository is the portfolio assessment; the separate application repository is the personal SaaS development project. This update changes only the assessment repository. Public availability of source does not establish deployment status, production readiness, or regulatory compliance.
 
-That distinction is itself part of the exercise. Deciding what is safe to disclose, and when, is a security judgment.
+The full working findings log, dated test outputs, assessed commit, and deployment evidence are not published here. Therefore, prior remediation and test results are treated as **reported historical results**, not independently verified current closure. Detailed open-finding locations are omitted from this portfolio summary; omission is not a substitute for access control.
 
 | Document | Contents |
 |---|---|
-| [`docs/Security_Assessment_Portfolio_Summary.pdf`](docs/Security_Assessment_Portfolio_Summary.pdf) | Three-page assessment summary — methodology, findings distribution, remediation approach |
-| This README | Full narrative, the primary case study, and what I would do differently |
+| [`docs/Security_Assessment_Portfolio_Summary.pdf`](docs/Security_Assessment_Portfolio_Summary.pdf) | Historical assessment summary — methodology, findings distribution, remediation approach; not refreshed by this review |
+| [Management risk and remediation review](docs/Management_Risk_Remediation.md) | Decision priorities, accountable roles, proposed milestones, and closure requirements |
+| [IAM control and evidence matrix](docs/IAM_Control_Review.md) | Authentication, authorization, lifecycle, tenant isolation, and audit assurance |
+| This README | Original technical case study and historical assessment methodology |
 
 ---
 
@@ -51,7 +53,7 @@ Severity was assigned by impact on the confidentiality, integrity, and auditabil
 
 ---
 
-## Findings distribution
+## Historical findings distribution
 
 | Severity | Found | Closed | Definition applied |
 |---|---|---|---|
@@ -110,7 +112,7 @@ Three changes, not one:
 
 - A security control can be **structurally correct and semantically wrong**. Reviewing the shape of a check is not reviewing the check.
 - **Documentation and error messages are evidence of intent, not evidence of behavior.** Here they actively increased confidence in a control that was not functioning.
-- This class of defect is invisible to code review and to dependency scanning, and visible immediately to a single test. That is an argument for **tests as a security control**, not merely a quality one.
+- This defect can be missed by superficial code review and dependency scanning; targeted claim-semantic review and negative tests can expose it. That is an argument for **tests as a security control**, not merely a quality one.
 
 ---
 
@@ -126,7 +128,7 @@ Findings were sequenced by severity and by whether they gate a pilot handling re
 
 **Prefer no dependency to a small one.** Validating that an uploaded file is genuinely the type it claims to be could have been a third-party package. For three permitted formats it is fifteen lines of explicit, auditable byte comparison instead. Every dependency added to a system holding patient data is surface someone else controls — and this codebase already carried a finding for an unused dependency.
 
-**Prove the test catches the bug.** Thirty-five automated tests now guard the corrected controls. Before accepting each suite, I restored the original defective code and confirmed the tests failed, then restored the fixes and confirmed they passed:
+**Prove the test catches the bug.** The prior assessment reports thirty-five automated tests guarding the corrected controls. Dated output and an assessed commit are needed before using this count as current closure evidence. Before accepting each suite, I restored the original defective code and confirmed the tests failed, then restored the fixes and confirmed they passed:
 
 | Suite | Reverted to | Result |
 |---|---|---|
@@ -136,7 +138,7 @@ Findings were sequenced by severity and by whether they gate a pilot handling re
 
 **A test that has never been shown to fail is not yet evidence of anything.**
 
-**Track honestly.** Eleven findings remain open and are documented as open, severity-ranked and sequenced.
+**Track honestly.** The historical assessment reports eleven open findings. Current status requires reconciliation with the working findings log.
 
 ---
 
@@ -144,7 +146,11 @@ Findings were sequenced by severity and by whether they gate a pilot handling re
 
 Findings were mapped to the provisions they implicate — HIPAA Security Rule citations for authentication (§164.312(d)), access control (§164.312(a)(1)), audit controls (§164.312(b)), integrity (§164.312(c)(1)), transmission security (§164.312(e)(1)), and evaluation (§164.308(a)(8)), plus 42 CFR Part 2 for the disclosure-specific findings and HIPAA's Minimum Necessary standard (§164.502(b)).
 
-A forward-looking note was included: the proposed HIPAA Security Rule update published as an NPRM in January 2025 would reclassify multi-factor authentication and encryption from *addressable* to *required*. That rule is not final and creates no obligation today — but it means the highest-severity finding sat on a control trending from recommended toward mandatory, which is a reason to weight it higher in sequencing than its immediate exploitability alone would suggest.
+MFA is assessed here as an explicit application control objective. Do not describe MFA itself as an existing “addressable” HIPAA implementation specification. HHS's proposed Security Rule changes include an explicit MFA requirement; proposed requirements are distinguished from enacted obligations. See [HHS proposed-rule factsheet](https://www.hhs.gov/hipaa/for-professionals/security/hipaa-security-rule-nprm/factsheet/index.html).
+
+Part 2 applicability must be established from the program, records, and data flows, rather than assumed for every MOUD-related software system. The 2024 Part 2 final rule required compliance by February 16, 2026; consent, disclosure, and breach workflows need assessment against applicable requirements. See [HHS Part 2 guidance](https://www.hhs.gov/hipaa/part-2/index.html).
+
+These mappings identify relevant control objectives; this portfolio does not establish a legal violation or certify compliance.
 
 ### Frameworks deliberately declined
 
@@ -152,7 +158,7 @@ Deciding what *not* to build is part of compliance analysis. Claiming coverage o
 
 - **HITECH** — amended HIPAA; its requirements are already covered by the HIPAA work rather than constituting a separate system.
 - **HITRUST** — certification is a paid third-party assessment; no software can grant it. A CSF self-assessment tracker is buildable and useful; a claim of certification is not.
-- **GDPR** — no plausible trigger for clinics serving a Philadelphia patient population.
+- **GDPR** — not assessed in this review; applicability requires checking actual processing, establishment, and service scope.
 
 ---
 
