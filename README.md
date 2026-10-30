@@ -1,8 +1,18 @@
-# MOUD Compliance Suite — GRC & IAM Security Assessment
+# MOUD Compliance Suite — GRC and IAM Security Assessment
+
+[Portfolio index](https://github.com/IAM-ZeroTrustRon/GRC-IAM-Portfolio) · **Repository role:** Owner-conducted application security assessment.
 
 I built the MAT/MOUD web-based SaaS application with assistance from agentic AI development tools, then conducted a security self-assessment of my own software. The mobile version is in development. This is an owner-conducted review, not an independent third-party audit.
 
 The assessment considers controls relevant to HIPAA and, where applicable, 42 CFR Part 2. AI assistance is part of the development context; the evidence does not establish who or what introduced a particular defect.
+
+## Current evidence and repository roles
+
+- [Application source and controls](https://github.com/IAM-ZeroTrustRon/MATMOUD-clinical-compliance-suite) — implementation, regression tests and current security debt.
+- [Control-to-test evidence register](https://github.com/IAM-ZeroTrustRon/MATMOUD-clinical-compliance-suite/blob/main/docs/CONTROL-EVIDENCE.md) — dated, scoped evidence; it does not retroactively close historical findings.
+- [Architecture case study](https://github.com/IAM-ZeroTrustRon/Clinical_Compliance_Hub) — design rationale and workflow context.
+
+The findings counts below remain historical. Current source and test evidence are published in the application repository; their scope must be reviewed before asserting present operating effectiveness.
 
 **Historical assessment: 18 findings; 7 reported closed and 11 reported open. Current operational effectiveness has not been revalidated in this documentation review.**
 
@@ -12,11 +22,11 @@ The original audit graphic and PDF are retained as historical artifacts. Their c
 
 ## What this repository is
 
-This is the **public methodology and outcomes** record of a security assessment. The system under review is the MAT/MOUD Clinical Compliance Suite, a multi-tenant SaaS application that tracks clinician credentials for clinics treating opioid use disorder. It stores protected health information and is governed by both the HIPAA Security Rule and 42 CFR Part 2 — the stricter federal rule under which the mere association of a person with an addiction treatment program is itself protected information.
+This is the **public methodology and outcomes** record of a security assessment. The system under review is the MAT/MOUD Clinical Compliance Suite, a multi-tenant SaaS application that tracks clinician credentials for clinics treating opioid use disorder. The prototype is designed for sensitive credential workflows and currently uses synthetic data. Applicability of HIPAA and 42 CFR Part 2 depends on the program, records and data flows; a product name alone does not establish that scope.
 
 This repository is the portfolio assessment; the separate application repository is the personal SaaS development project. This update changes only the assessment repository. Public availability of source does not establish deployment status, production readiness, or regulatory compliance.
 
-The full working findings log, dated test outputs, assessed commit, and deployment evidence are not published here. Therefore, prior remediation and test results are treated as **reported historical results**, not independently verified current closure. Detailed open-finding locations are omitted from this portfolio summary; omission is not a substitute for access control.
+This assessment repository does not contain the complete working findings log or deployment evidence. Dated implementation tests and source references are now published separately in the application repository. Therefore, prior remediation and test results are treated as **reported historical results**, not independently verified current closure. Detailed open-finding locations are omitted from this portfolio summary; omission is not a substitute for access control.
 
 | Document | Contents |
 |---|---|
@@ -138,7 +148,7 @@ Findings were sequenced by severity and by whether they gate a pilot handling re
 | Presigned URLs | 7-day expiry | expiry assertion failed ✓ |
 | Upload validation | client-declared type trusted | 3 tests failed ✓ |
 
-**A test that has never been shown to fail is not yet evidence of anything.**
+**A passing test supports only its stated assertions; demonstrating that it catches the original defect strengthens that evidence.**
 
 **Track honestly.** The historical assessment reports eleven open findings. Current status requires reconciliation with the working findings log.
 
