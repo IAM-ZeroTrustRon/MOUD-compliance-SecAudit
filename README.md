@@ -2,6 +2,10 @@
 
 [Portfolio index](https://github.com/IAM-ZeroTrustRon/GRC-IAM-Portfolio) · **Repository role:** Owner-conducted application security assessment.
 
+> **Synthetic-data prototype.** No real patient data. Findings reflect a self-audit. This documentation does not establish production readiness or regulatory certification.
+
+**Current status (2026-10-31):** 18 findings — **13 closed, 1 partial, 4 open** — reconciled against application revision `19603a2` in the [findings matrix](docs/FINDINGS-MATRIX.md). Those 13 are not "13 fully tested closures": nine are test-backed, three are structural checks, and one is inspection-only with its regression test pending. Each disposition names its evidence strength.
+
 I built the MAT/MOUD web-based SaaS application with assistance from agentic AI development tools, then conducted a security self-assessment of my own software. The mobile version is in development. This is an owner-conducted review, not an independent third-party audit.
 
 The assessment considers controls relevant to HIPAA and, where applicable, 42 CFR Part 2. AI assistance is part of the development context; the evidence does not establish who or what introduced a particular defect.
@@ -10,13 +14,14 @@ The assessment considers controls relevant to HIPAA and, where applicable, 42 CF
 
 - [Application source and controls](https://github.com/IAM-ZeroTrustRon/MATMOUD-clinical-compliance-suite) — implementation, regression tests and current security debt.
 - [Control-to-test evidence register](https://github.com/IAM-ZeroTrustRon/MATMOUD-clinical-compliance-suite/blob/main/docs/CONTROL-EVIDENCE.md) — dated, scoped evidence; it does not retroactively close historical findings.
+- [Findings matrix](docs/FINDINGS-MATRIX.md) — per-finding current status, evidence strength, and residual limitations, reconciled 2026-10-31.
 - [Architecture case study](https://github.com/IAM-ZeroTrustRon/Clinical_Compliance_Hub) — design rationale and workflow context.
 
-The findings counts below remain historical. Current source and test evidence are published in the application repository; their scope must be reviewed before asserting present operating effectiveness.
+The findings counts below remain historical. Dated source hashes and test results for the current state are published in the application repository; their scope must be read before any operating-effectiveness claim is made.
 
-**Historical assessment: 18 findings; 7 reported closed and 11 reported open. Current operational effectiveness has not been revalidated in this documentation review.**
+**Historical assessment: 18 findings; 7 reported closed and 11 reported open.** Those figures are preserved as the September baseline and are not restated as current.
 
-The original audit graphic and PDF are retained as historical artifacts. Their closure and test statements describe the prior assessment, not a current production assurance decision.
+The original audit graphic, the process diagram, and the PDF are retained as historical artifacts. Their closure and test statements describe the prior assessment, not a current production assurance decision. `assets/grc-process.html` and its corresponding PNG predate this reconciliation: their remediation summary is historical and is superseded by the dated findings matrix.
 
 ---
 
@@ -28,11 +33,14 @@ This repository is the portfolio assessment; the separate application repository
 
 This assessment repository does not contain the complete working findings log or deployment evidence. Dated implementation tests and source references are now published separately in the application repository. Therefore, prior remediation and test results are treated as **reported historical results**, not independently verified current closure. Detailed open-finding locations are omitted from this portfolio summary; omission is not a substitute for access control.
 
+**Secret-scanning status.** Provider-pattern alerts: 0; full content scan pending. The zero count is a provider-detection alert result reported on 2026-10-31 and not re-queried in this documentation pass. Provider-pattern alerts do not establish the absence of secrets throughout all repository content and history. A historical development credential-like string was reported; its validity is unconfirmed and the rotation decision is pending. No secret value is reproduced here.
+
 | Document | Contents |
 |---|---|
 | [`docs/Security_Assessment_Portfolio_Summary.pdf`](docs/Security_Assessment_Portfolio_Summary.pdf) | Historical assessment summary — methodology, findings distribution, remediation approach; not refreshed by this review |
 | [Management risk and remediation review](docs/Management_Risk_Remediation.md) | Decision priorities, accountable roles, proposed milestones, and closure requirements |
 | [IAM control and evidence matrix](docs/IAM_Control_Review.md) | Authentication, authorization, lifecycle, tenant isolation, and audit assurance |
+| [Findings matrix](docs/FINDINGS-MATRIX.md) | Per-finding current status, evidence strength, and residual limitations at a named revision |
 | This README | Original technical case study and historical assessment methodology |
 
 ---
@@ -73,6 +81,20 @@ Severity was assigned by impact on the confidentiality, integrity, and auditabil
 | **High** | 3 | **3** | Direct PHI exposure or integrity risk, or a security feature that does not work |
 | **Medium** | 6 | 1 | Weakens defense in depth, or leaves a compliance obligation unevidenced |
 | **Low** | 7 | 1 | Hygiene, maintainability, and information-disclosure issues |
+
+### Current reconciliation (2026-10-31)
+
+Counts above are the September baseline. The dated position, derived finding by finding from the application source, is:
+
+| Severity | Closed | Partial | Open | Total |
+|---|---:|---:|---:|---:|
+| **Critical** | 2 | 0 | 0 | 2 |
+| **High** | 3 | 0 | 0 | 3 |
+| **Medium** | 3 | 1 | 2 | 6 |
+| **Low** | 5 | 0 | 2 | 7 |
+| **Total** | **13** | **1** | **4** | **18** |
+
+The Medium closed findings are MOUD-07, MOUD-09, and MOUD-11. MOUD-11 carried a mixed "Low–Medium" label while sitting in the Medium section of the original assessment; that established bucket is retained so the totals reconcile against the original document. Per-finding status, evidence strength, and limitations are in the [findings matrix](docs/FINDINGS-MATRIX.md).
 
 Closed findings are retained in the working log with their remediation recorded rather than deleted, so the document functions as an audit trail rather than a to-do list. A findings log containing only closed items is not evidence of a security program.
 
@@ -140,7 +162,7 @@ Findings were sequenced by severity and by whether they gate a pilot handling re
 
 **Prefer no dependency to a small one.** Validating that an uploaded file is genuinely the type it claims to be could have been a third-party package. For three permitted formats it is fifteen lines of explicit, auditable byte comparison instead. Every dependency added to a system holding patient data is surface someone else controls — and this codebase already carried a finding for an unused dependency.
 
-**Prove the test catches the bug.** The prior assessment reports thirty-five automated tests guarding the corrected controls. Dated output and an assessed commit are needed before using this count as current closure evidence. The prior assessment reports that before accepting each suite, I restored the original defective code and confirmed the tests failed, then restored the fixes and confirmed they passed:
+**Prove the test catches the bug.** The prior assessment reports thirty-five automated tests guarding the corrected controls; the current record is larger — 87 API cases passed with 7 opt-in database cases skipped, plus 7 PostgreSQL isolation cases passed, executed 2026-10-31 against application revision `19603a2`, with results and source hashes in the application repository's committed evidence manifest. The prior assessment reports that before accepting each suite, I restored the original defective code and confirmed the tests failed, then restored the fixes and confirmed they passed:
 
 | Suite | Reverted to | Result |
 |---|---|---|
@@ -148,9 +170,9 @@ Findings were sequenced by severity and by whether they gate a pilot handling re
 | Presigned URLs | 7-day expiry | expiry assertion failed ✓ |
 | Upload validation | client-declared type trusted | 3 tests failed ✓ |
 
-**A passing test supports only its stated assertions; demonstrating that it catches the original defect strengthens that evidence.**
+**A passing test supports only its stated assertions; demonstrating that it catches the original defect strengthens that evidence.** Those three reversion results are reported from the prior assessment; they were not re-executed for this reconciliation, and the matrix labels them accordingly.
 
-**Track honestly.** The historical assessment reports eleven open findings. Current status requires reconciliation with the working findings log.
+**Track honestly.** The historical assessment reports eleven open findings. The dated reconciliation records four open, one partial, and thirteen closed, each with the strength of its evidence stated — not an undifferentiated "closed" count.
 
 ---
 

@@ -1,10 +1,14 @@
 # Management risk and remediation review
 
-**Documentation review: October 7, 2026. Audience: security leadership, clinical operations, and the application owner.**
+**Documentation review: October 7, 2026; findings reconciled October 31, 2026. Audience: security leadership, clinical operations, and the application owner.**
+
+> Synthetic-data prototype. No real patient data. Findings reflect a self-audit. This documentation does not establish production readiness or regulatory certification.
 
 ## Executive decision
 
-The historical assessment reports 18 findings: seven closed and eleven open. All two critical and three high findings were reported closed. This review does not rerun application tests, examine a deployed environment, or approve use of real patient data. The recommended decision is to require current control evidence before any patient-data pilot approval.
+The historical assessment reports 18 findings: seven closed and eleven open. All two critical and three high findings were reported closed. A dated reconciliation now records **13 closed, 1 partial, 4 open**, derived finding by finding from application revision `19603a2` on 2026-10-31 and recorded in the [findings matrix](FINDINGS-MATRIX.md). This review cites that evidence record; it does not rerun application tests, examine a deployed environment, or approve use of real patient data. The recommended decision is unchanged: require current control evidence — including the operating evidence this repository does not hold — before any patient-data pilot approval.
+
+Of the 13 closed findings, nine are test-backed, three were verified by structural check, and one is inspection-only with its regression test pending. One finding (MOUD-08) remains partial against its original acceptance scope, and four (MOUD-06, MOUD-10, MOUD-16, MOUD-17) remain open. A test count is not a closure argument: each disposition states the strength of the evidence behind it.
 
 The priorities below aggregate published finding categories. They are not newly discovered vulnerabilities, replacements for the original 18 finding IDs, or proof that every category remains deficient.
 
@@ -19,14 +23,15 @@ P1 means decision gate; P2 means scheduled treatment. These are management prior
 
 ## Evidence and risk status
 
-- **Confirmed documentation gap:** the public package lacks an assessed commit, dated regression output, and the full working findings log needed to reproduce closure.
+- **Narrowed documentation gap:** an assessed commit (`19603a2`), dated regression output (2026-10-31, recorded at `3c36593`), and source hashes are now published in the application repository. The deployed environment, the runtime database role, and operating evidence remain outside it, so closure can be reproduced while operating effectiveness still cannot be demonstrated from this repository.
 - **Reported deficiency:** a condition described by the original author, without independent current verification in this pass.
-- **Reported closed:** prior remediation claim; retain it without treating it as verified current effectiveness.
+- **Reported closed:** prior remediation claim recorded in the September baseline, retained as history rather than restated as current.
+- **Verified at a revision:** closure supported by tests, structural checks, or inspection at `19603a2` on 2026-10-31, to the strength stated in the findings matrix. Test-backed, structural, and inspection-only closures are not equivalent and are never aggregated into a single unqualified "closed" figure.
 - **Inherent risk:** exposure before crediting safeguards. No quantitative inherent-risk scores were established in this pass.
 - **Residual risk:** exposure after verified controls. Current residual risk is **unassessed**; no numerical reduction or “low risk” outcome is claimed.
 - **Conditional residual risk:** an expected outcome if specified controls work; still requires validation and risk-owner acceptance.
 
-The original findings total must remain 18 until the working log supports a reconciliation. Do not map these four review groups one-to-one to undisclosed findings or invent closure dates.
+The original findings total remains 18. A dated reconciliation now exists: the [findings matrix](FINDINGS-MATRIX.md) is the file that holds each finding's status, and it supersedes the earlier statement that no reconciling log was available. Do not map these four review groups one-to-one to individual findings or invent closure dates.
 
 ## Approval and exception rules
 
@@ -36,4 +41,4 @@ Before a real-patient-data pilot, require G01–G03 evidence, privacy applicabil
 
 ## Historical evidence
 
-The [original assessment PDF](Security_Assessment_Portfolio_Summary.pdf) and existing graphics are historical artifacts. They are preserved, not reissued as current assurance. The [IAM matrix](IAM_Control_Review.md) defines the technical evidence needed for the management decision; the README retains the original case-study narrative.
+The [original assessment PDF](Security_Assessment_Portfolio_Summary.pdf) and existing graphics are historical artifacts. They are preserved, not reissued as current assurance; the September counts they carry are superseded by the dated [findings matrix](FINDINGS-MATRIX.md), which does not retroactively rewrite them. The [IAM matrix](IAM_Control_Review.md) defines the technical evidence needed for the management decision; the README retains the original case-study narrative.
