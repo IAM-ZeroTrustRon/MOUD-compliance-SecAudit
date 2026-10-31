@@ -11,7 +11,7 @@ graph TD
 
     F --> G["<b>Severity Assignment</b><br/>Impact on PHI confidentiality,<br/>integrity, auditability<br/><b>NOT</b> difficulty to fix<br/><br/>Mapped to HIPAA Security Rule &<br/>42 CFR Part 2 provisions"]
 
-    G --> H["<b>Output</b><br/>18 Findings Identified<br/>━━━━━━━━━━━━━━━━━━<br/>Critical: 2 closed ✓<br/>High: 3 closed ✓<br/>Medium: 1 closed, 5 open<br/>Low: 1 closed, 6 open<br/><br/>35 Regression Tests<br/>Each proven to FAIL<br/>against original code"]
+    G --> H["<b>Output</b><br/>18 Findings Identified<br/>━━━━━━━━━━━━━━━━━━<br/>13 closed · 1 partial · 4 open<br/>Critical: 2 closed<br/>High: 3 closed<br/>Medium: 3 closed, 1 partial, 2 open<br/>Low: 5 closed, 2 open<br/><br/>Tests recorded at 3c36593<br/>API: 87 passed, 7 skipped<br/>PostgreSQL: 7 passed<br/><br/>Reversion results reported for<br/>MOUD-01, 03, 04 — not re-executed"]
 
     style A fill:#1a1a19,stroke:#0ca30c,stroke-width:2px,color:#fff
     style B fill:#0d0d0d,stroke:#fab219,stroke-width:2px,color:#fff
