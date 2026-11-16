@@ -21,7 +21,7 @@ The findings counts below remain historical. Dated source hashes and test result
 
 **Historical assessment: 18 findings; 7 reported closed and 11 reported open.** Those figures are preserved as the September baseline and are not restated as current.
 
-The original audit graphic, the process diagram, and the PDF are retained as historical artifacts. Their closure and test statements describe the prior assessment, not a current production assurance decision. `assets/grc-process.html` and its corresponding PNG predate this reconciliation: their remediation summary is historical and is superseded by the dated findings matrix.
+The PNG exports of the two process graphics and the PDF are retained as historical artifacts: their closure and test statements describe the prior assessment, not a current production assurance decision. The HTML sources, `assets/audit-summary.html` and `assets/grc-process.html`, follow the dated findings matrix.
 
 ---
 
